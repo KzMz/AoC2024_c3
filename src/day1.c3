@@ -2,6 +2,7 @@ module kzmz::aoc::y24;
 
 import std::io;
 import std::collections::list;
+import std::collections::map;
 import std::math;
 import std::sort;
 
@@ -70,6 +71,40 @@ fn long day1_similarity(List(<String>) lines)
 		}
 
 		result += first * score;
+	}
+
+	io::printfn("Result: %d", result);
+	return result;
+}
+
+fn long day1_similarity2(List(<String>) lines)
+{
+	io::printn("Starting day1_similarity2...");
+
+	List(<ulong>) first_col;
+	first_col.temp_init(lines.len());
+
+	HashMap(<ulong, uint>) similarity;
+
+	foreach (line : lines)
+	{
+		String[] parts = line.tsplit("   ");
+		assert(parts.len == 2);
+
+		long first = parts[0].to_long()!!;
+		first_col.push(first);
+
+		long second = parts[1].to_long()!!;
+		
+		uint score = similarity[second] ?? 0;
+		similarity[second] = score + 1;
+	}
+
+	long result = 0;
+	for (usz i = 0; i < first_col.len(); i++)
+	{
+		long first = first_col[i];
+		result += first * similarity[first] ?? 0;
 	}
 
 	io::printfn("Result: %d", result);
