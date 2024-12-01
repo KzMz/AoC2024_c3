@@ -1,9 +1,14 @@
 module kzmz::aoc::tester(<TestData>);
 
-def TestFunction = fn TestData(String input);
+import std::io;
+import std::collections::list;
 
-fn void! test(TestFunction func, String input, TestData expected)
+def TestFunction = fn TestData(List(<String>) input);
+
+fn void! test(TestFunction func, List(<String>) input, TestData expected)
 {
 	TestData result = func(input);
 	assert(result == expected, "Test failed!");
+
+	io::printfn("Test for function passed!");
 }

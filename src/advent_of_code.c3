@@ -1,20 +1,22 @@
 module kzmz::aoc::y24;
 
 import std::io;
+import std::collections::list;
 import kzmz::aoc::tester;
-
-fn String day0(String input)
-{
-	return "day0";
-}
 
 fn void! main()
 {
 	io::printfn("Hello, Advent of Code 2024!");
 
-	char[] test_input = aoc::load_asset("test.txt")!;
 
-	tester::test(<String>)(&day0, (String) test_input, "day0")!;
+	List(<String>) lines;
+	lines.temp_init();
+
+	aoc::load_asset_lines("1.txt", &lines)!;
+	long result = y24::day1_distance(lines);
+	result = y24::day1_similarity(lines);
+
+	//tester::test(<long>)(&y24::day1, lines, 11)!;
 
 	return;
 }
